@@ -2,6 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 
+//IMPORTANDO LA RUTA HOMECONTROLLER PRINCIPAL
+use App\Http\Controllers\HomeController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,11 +16,14 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+//LLAMA DEL CONTROLADOR HOME PRINCIPAL
+Route::get('/', HomeController::class)->name('home');
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
 
+//LLAMADA DEL DASHBOAR 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+
+

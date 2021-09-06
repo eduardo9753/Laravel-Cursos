@@ -11,62 +11,86 @@ class Course extends Model
 
     protected $guarded = ['id', 'status'];
 
+    //VER CANTIDAD DE ALUMNOS MATRICULADOS A LOS CURSOS
+    protected $withCount = ['students', 'reviews'];
+
     const BORRADOR = 1;
     const REVISION = 2;
     const PUBLICADO = 3;
 
-    //Relacion uno a muchos
+    //METODO PARA VISUALIZAR LAS ESTRELLAS
+    public function getRatingAttribute()
+    {
+        if ($this->reviews_count) { //si tienes calificaciones retorname
+            return round($this->reviews->avg('rating'), 2);
+        } else {                    //de los contrario 5 estrellas
+            5;
+        }
+    }
 
-    public function reviews(){
+
+    //Relacion uno a muchos
+    public function reviews()
+    {
         return $this->hasMany('App\Models\Review');
     }
 
-    public function requirements(){
+    public function requirements()
+    {
         return $this->hasMany('App\Models\Requirement');
     }
 
-    public function goals(){
+    public function goals()
+    {
         return $this->hasMany('App\Models\Goal');
     }
 
-    public function audiences(){
+    public function audiences()
+    {
         return $this->hasMany('App\Models\Audience');
     }
 
-    public function sections(){
+    public function sections()
+    {
         return $this->hasMany('App\Models\Section');
     }
 
     //Relacion uno a muchos inversa
-    public function teacher(){
+    public function teacher()
+    {
         return $this->belongsTo('App\Models\User', 'user_id');
     }
-    
-    public function level(){
+
+    public function level()
+    {
         return $this->belongsTo('App\Models\Level');
     }
 
-    public function category(){
+    public function category()
+    {
         return $this->belongsTo('App\Models\Level');
     }
 
-    public function price(){
+    public function price()
+    {
         return $this->belongsTo('App\Models\Level');
     }
 
     //Relacion muchos a muchos
-    public function students(){
+    public function students()
+    {
         return $this->belongsToMany('App\Models\User');
     }
 
     //Relacion uno a uno polimorfica
-
-    public function image(){
+    public function image()
+    {
         return $this->morphOne('App\Models\Image', 'imageable');
     }
 
     //Relacion hasManyThrough
-    public function lessons(){
+    public function lessons()
+    {
         return $this->hasManyThrough('App\Models\Lesson', 'App\Models\Section');
     }
 }

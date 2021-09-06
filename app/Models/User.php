@@ -60,13 +60,11 @@ class User extends Authenticatable
     ];
 
     //Relacion uno a uno
-
     public function profile(){
         return $this->hasOne('App\Models\Profile');
     }
 
     //Relacion uno a muchos
-
     public function courses_dictated(){
         return $this->hasMany('App\Models\Course');
     }
@@ -84,7 +82,6 @@ class User extends Authenticatable
     }
 
     //Relacion muchos a muchos
-
     public function courses_enrolled(){
         return $this->belongsToMany('App\Models\Course');
     }
