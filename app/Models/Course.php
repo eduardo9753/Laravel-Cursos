@@ -18,7 +18,7 @@ class Course extends Model
     const REVISION = 2;
     const PUBLICADO = 3;
 
-    //METODO PARA VISUALIZAR LAS ESTRELLAS
+    //METODO PARA VISUALIZAR LAS ESTRELLAS EN LA VISTA "welcome.blade.php"
     public function getRatingAttribute()
     {
         if ($this->reviews_count) { //si tienes calificaciones retorname
@@ -28,7 +28,13 @@ class Course extends Model
         }
     }
 
+    //PARA GENERAR LOS SLUG
+    public function getRouteKeyName()
+    {
+        return "slug";
+    }
 
+    
     //Relacion uno a muchos
     public function reviews()
     {
@@ -56,7 +62,7 @@ class Course extends Model
     }
 
     //Relacion uno a muchos inversa
-    public function teacher()
+    public function teachers()
     {
         return $this->belongsTo('App\Models\User', 'user_id');
     }

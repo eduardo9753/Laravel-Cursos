@@ -20,10 +20,19 @@ use App\Http\Controllers\HomeController;
 Route::get('/', HomeController::class)->name('home');
 
 
-//LLAMADA DEL DASHBOAR 
+//LLAMADA DEL DASHBOARD 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
 
+//RUTA EN LA PAGINA HOME  "siempre se llama por el name(''), en la url se mostrara lo que dice el get('cursos')" 
+Route::get('cursos', function () {
+    return "Aqui se mostraran los cursos";
+})->name('courses.index');
 
+
+//MOSTRAR CURSO PO ID DESDE LA PAGINA HOME "siempre se llama por el name(''), en la url se mostrara lo que dice el get('cursos')" 
+Route::get('cursos/{id}', function ($id) {
+    return "Aqui se mostrar el curso";
+})->name('courses.show');
