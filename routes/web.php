@@ -2,9 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 
-//IMPORTANDO LA RUTA HOMECONTROLLER PRINCIPAL
+//IMPORTANDO HOMECONTROLLER PRINCIPAL
 use App\Http\Controllers\HomeController;
 
+//IMPORTANDO COURCECONTROLLER 
+use App\Http\Controllers\CourseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,9 +29,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 
 //RUTA EN LA PAGINA HOME  "siempre se llama por el name(''), en la url se mostrara lo que dice el get('cursos')" 
-Route::get('cursos', function () {
-    return "Aqui se mostraran los cursos";
-})->name('courses.index');
+Route::get('cursos', [CourseController::class, 'index'])->name('courses.index');
 
 
 //MOSTRAR CURSO PO ID DESDE LA PAGINA HOME "siempre se llama por el name(''), en la url se mostrara lo que dice el get('cursos')" 

@@ -1,9 +1,9 @@
 <x-app-layout>
     <section class="bg-cover bg-fixed" style="background-image: url({{ asset('img/home/home.jpg') }})">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-36">
+        <div class="bg-opacity-5 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-36">
             <div class="w-full md:w-3/4 lg:w-1/2">
-                <h1 class="text-white font-bold text-4xl"> Domina Tus conocimientos con Cursos</h1>
-                <p class="text-orange-500 text-lg mt-3">En Cursos Only Encontraras lo mejores cursos, manuales y
+                <h1 class="font-bold text-4xl text-gray-300"> Domina Tus conocimientos con Cursos</h1>
+                <p class="text-lg mt-3 text-gray-100">En Cursos Only Encontraras lo mejores cursos, manuales y
                     articulos que te ayudaran a convertir en un experto</p>
 
                 <div class="mt-4 relative text-gray-600">
@@ -95,7 +95,7 @@
         <!-- component -->
         <div class="mt-4 flex justify-center">
             <a href="{{ route('courses.index') }}"
-                class="bg-transparent hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded">
+                class="btn-primary p-3 rounded-sm">
                 Ir a los Cursos
             </a>
         </div>
@@ -106,49 +106,12 @@
         <h1 class="text-center text-xl text-gray-600">Ultimos Cursos</h1>
         <p class="text-center text-gray-500 text-sm mb-6">Los ultimos cursos subidos por tus docentes</p>
 
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gag-y-8">
+        <div
+            class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gag-y-8">
             {{-- Recorriendo los cursos --}}
             @foreach ($courses as $course)
-                <article class="bg-white shadow-lg rounded overflow-hidden mb-10">
-                    {{-- llamando la ruta de las imagenes almacenadas en la carpeta --}}
-                    <img class="h-36 w-full object-cover" src=" {{ Storage::url($course->url) }}" alt="">
-
-                    <div class="px-6 py-4"> {{-- para el limite de caracteres --}}
-                        <h1 class="text-xl text-gray-700 mb-2 leading-6">{{ Str::limit($course->title, 35) }}</h1>
-                        <p class="text-red-700 mb-4">Profesor : {{ $course->teachers->name }}</p>
-
-                        <div class="flex">
-                            <ul class="flex text-sm">
-                                <li class="mr-1">
-                                    <i class=" fas fa-star text-{{ $course->rating >= 1 ? 'yellow' : 'gray' }}-400"></i>
-                                </li>
-                                <li class="mr-1">
-                                    <i class=" fas fa-star text-{{ $course->rating >= 2 ? 'yellow' : 'gray' }}-400"></i>
-                                </li>
-                                <li class="mr-1">
-                                    <i class=" fas fa-star text-{{ $course->rating >= 3 ? 'yellow' : 'gray' }}-400"></i>
-                                </li>
-                                <li class="mr-1">
-                                    <i class=" fas fa-star text-{{ $course->rating >= 3 ? 'yellow' : 'gray' }}-400"></i>
-                                </li>
-                                <li class="mr-1">
-                                    <i class=" fas fa-star text-{{ $course->rating == 5 ? 'yellow' : 'gray' }}-400"></i>
-                                </li>
-                            </ul>
-
-                            <p class="text-sm text-gray-500 ml-auto">
-                                <i class="fas fa-users">
-                                    ({{ $course->students_count }})
-                                </i>
-                            </p>
-                        </div>
-                         {{--pasando el id del curso a la vista "course.show"--}}
-                        <a href="{{ route('courses.show' , $course) }}"
-                            class="block text-center w-full bg-blue-500 text-white font-bold py-2 px-4 rounded-sm mt-4">
-                            Ir a los Cursos
-                        </a>
-                    </div>
-                </article>
+                {{-- Llamada del componente "resources/views/components/course-card-blade.php" --}}
+                <x-course-card :course="$course"></x-course-card>
             @endforeach
             {{-- end recorriendo los cursos --}}
         </div>

@@ -11,7 +11,7 @@ class HomeController extends Controller
     //
     public function __invoke()
     {
-        //REGISTROS EN FORMA DESCENDENTE yY LOS ULTIMOS 12
+        //REGISTROS EN FORMA DESCENDENTE Y LOS ULTIMOS 12
         $courses = Course::where('status', '3')->latest('id')->get()->take(12);
         return view('welcome' , compact('courses')); //mandando los datos a la vista
     }
