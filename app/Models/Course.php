@@ -11,6 +11,20 @@ class Course extends Model
 
     protected $guarded = ['id', 'status'];
 
+    /*
+    *TODOS LOS METODOS QUE SE REALIZAN EN LOS MODELOS PUEDEN SER
+     LLAMADOS DESDE LAS VISTAS SI SE INSTANCIO EN SU CONTROLADOR 
+     CORRESPONDIENTE
+    */
+
+
+    /**
+     * CON LAS RELACIONES CREADAS ABAJO
+     * SE PUEDE ACCEDER A LOS CAMPOS DE LAS TABLAS 
+     * INVESTIGAR LAS RELACION YA ESCRITAS ABAJO 
+     * PARA MAS CONOCIMIENTO
+     */
+
     //VER CANTIDAD DE ALUMNOS MATRICULADOS A LOS CURSOS
     protected $withCount = ['students', 'reviews'];
 
@@ -28,29 +42,26 @@ class Course extends Model
         }
     }
 
-    //QUERY SCOPES
-    public function scopeCategory($query, $category_id)
+    //QUERY SCOPES ACCESIBLE DESDE LA VISTA PARA REALIZAR RECORRIDOS CON FORAEACHT
+    public function scopeCategory($query, $category_id)//RETORNA LAS CATEGORIAS
     {
         if ($category_id) {
             return $query->where('category_id', $category_id);
         }
     }
 
-    public function scopeLevel($query, $level_id)
+    public function scopeLevel($query, $level_id) //RETORNA LOS NIVELES
     {
         if ($level_id) {
             return $query->where('level_id', $level_id);
         }
     }
-
-
     
     //PARA GENERAR LOS SLUG
     public function getRouteKeyName()
     {
         return "slug";
     }
-
 
     //Relacion uno a muchos
     public function reviews()
@@ -91,7 +102,7 @@ class Course extends Model
 
     public function category()
     {
-        return $this->belongsTo('App\Models\Level');
+        return $this->belongsTo('App\Models\Category');
     }
 
     public function price()

@@ -1,6 +1,7 @@
 {{--VARIABLE COMO ATRIBUTO AL COMPONENTE--}}
 @props(['course'])
 
+{{--COPIANDO EL SOLO EL ARTICULO DE CURSOS--}}
 <article class="card">
     {{-- llamando la ruta de las imagenes almacenadas en la carpeta --}}
     <img class="h-36 w-full object-cover" src=" {{ Storage::url($course->url) }}" alt="">
@@ -41,3 +42,4 @@
         </a>
     </div>
 </article>
+{{--COPIANDO EL SOLO EL ARTICULO DE CURSOS END--}}

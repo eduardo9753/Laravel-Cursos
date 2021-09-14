@@ -9,7 +9,7 @@ $nav_links = [
     [
         'name' => 'Cursos',
         'route' => route('courses.index'),
-        'active' =>  request()->routeIs('courses.index'),
+        'active' =>  request()->routeIs('courses.*'),
     ]
 ];
 @endphp
@@ -44,7 +44,6 @@ $nav_links = [
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">
-
                 @auth
                     <x-jet-dropdown align="right" width="48">
                         <x-slot name="trigger">
@@ -70,7 +69,6 @@ $nav_links = [
                                     </div>
                                 </button>
                             @endif
-
                         </x-slot>
 
                         <x-slot name="content">
@@ -125,7 +123,6 @@ $nav_links = [
                             <!-- Authentication -->
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
-
                                 <x-jet-dropdown-link href="{{ route('logout') }}" onclick="event.preventDefault();
                                                                     this.closest('form').submit();">
                                     {{ __('Logout') }}
@@ -169,7 +166,6 @@ $nav_links = [
 
         <!-- Responsive Settings Options -->
         @auth
-
             <div class="pt-4 pb-1 border-t border-gray-200">
                 <div class="flex items-center px-4">
                     <div class="flex-shrink-0">
@@ -239,7 +235,6 @@ $nav_links = [
                     @endif
                 </div>
             </div>
-
         @else
 
             <div class="py-1 border-t border-gray-200">
